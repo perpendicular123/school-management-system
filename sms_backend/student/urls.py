@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from student.views import StudentListCreateApiView
+from student.views import UserListCreateApiView,UserUpdateApiView,ClassCreateApiView,StudentCreateApiView
 
 urlpatterns = [
-    path('add_user/', StudentListCreateApiView.as_view(),name="add_user"),
+    path('add_user/', UserListCreateApiView.as_view(),name="add_user"),
+    path('update_user/<int:pk>',UserUpdateApiView.as_view(),name="update"),
+    path('add_student/',StudentCreateApiView.as_view(),name="register_student"),
+    path('add_class/',ClassCreateApiView.as_view(),name="add_class")
 ]
