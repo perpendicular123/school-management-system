@@ -12,12 +12,17 @@ class ClassSerilizer(serializers.ModelSerializer):
         fields = "__all__"
 
 class StudentSerilizer(serializers.ModelSerializer):
-    student = UserSerializers(many =True)
-    parents = UserSerializers(many = True)
+    student = UserSerializers()
+    parent = UserSerializers()
+    
     class Meta:
         model = student_realtions
-        fields = ['student','parents']
+        fields = ['student','parent','classes','section']
     
-    def create(self, validated_data):
-        import pdb;pdb.set_trace()
-        return 'order'
+    def create(self, validated_data):   
+        student = user_model.objects.create(**validated_data.get('student'))
+        parent = user_model.objects.create(**validated_data.get('parent'))
+        classes = validated_data.get('classes')
+        section = validated_data.get('section')
+        student_relation = student_realtions.objects.create(student = student, parent = parent,classes = classes,section = section)
+        return student_relation

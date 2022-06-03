@@ -13,7 +13,7 @@ class user_model(models.Model):
         ('staff',"Staff"),
         ('teacher',"Teacher"),
         ('student',"Students"),
-        ( 'parents' , 'parents'),
+        ( 'parent' , 'parents'),
         ( 'accountant' , 'accountant'),    
     )
 
