@@ -67,12 +67,12 @@ class attendence(models.Model):
         ('absent', "Absent"),
     )
     status = models.CharField(max_length=20,choices = attendance,default="absent")
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     user = models.ForeignKey(user_model, on_delete=models.CASCADE, related_name="user")
-
     class Meta:
         verbose_name = "attendence"
         verbose_name_plural = "attendence"
+        unique_together = ("date", "user")
  
 class subject(models.Model):
     subjects = (
@@ -92,8 +92,6 @@ class subject(models.Model):
         verbose_name = "subject"
         verbose_name_plural = "subjects"
 
-
- 
 class teacher_relations(models.Model):
     subject = models.ForeignKey(subject,on_delete=models.CASCADE,related_name="subject")
     classes = models.ForeignKey(classes_model,on_delete=models.CASCADE,related_name="cla")
@@ -101,5 +99,5 @@ class teacher_relations(models.Model):
     class Meta:
         verbose_name = "teacher_relation"
         verbose_name_plural = "teacher_relations"
-
-        
+        unique_together = ["subject","teacher"]
+     

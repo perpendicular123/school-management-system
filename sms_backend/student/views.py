@@ -1,7 +1,9 @@
+from operator import ge
 from django.shortcuts import render
 from rest_framework import generics
-from student.models import user_model,classes_model,student_realtions
-from student.serializers import  UserSerializers,ClassSerilizer,StudentSerilizer
+from student.models import user_model,classes_model,student_realtions,attendence,subject,teacher_relations
+from student.serializers import  AttendenceSerilizer, UserSerializers,ClassSerilizer,StudentSerilizer,SubjectSerilizer,TeacherAssignSerializer
+from rest_framework.response import Response
 # Create your views here.
 
 class UserListCreateApiView(generics.ListCreateAPIView):
@@ -25,3 +27,15 @@ class ClassCreateApiView(generics.ListCreateAPIView):
 class StudentCreateApiView(generics.ListCreateAPIView):
     queryset = student_realtions.objects.all()
     serializer_class = StudentSerilizer
+
+class AttendanceCreateUpdateApiView(generics.ListCreateAPIView,generics.UpdateAPIView):
+    queryset = attendence.objects.all()
+    serializer_class = AttendenceSerilizer
+
+class SubjectCreateApiView(generics.ListCreateAPIView):
+    queryset = subject.objects.all()
+    serializer_class = SubjectSerilizer
+
+class AssignTeacherApiView(generics.ListCreateAPIView):
+    queryset = teacher_relations.objects.all()
+    serializer_class = TeacherAssignSerializer

@@ -16,11 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from student.views import UserListCreateApiView,UserUpdateApiView,ClassCreateApiView,StudentCreateApiView
+from student.views import UserListCreateApiView,UserUpdateApiView,ClassCreateApiView,StudentCreateApiView,AttendanceCreateUpdateApiView,SubjectCreateApiView,AssignTeacherApiView
 
 urlpatterns = [
     path('add_user/', UserListCreateApiView.as_view(),name="add_user"),
     path('update_user/<int:pk>',UserUpdateApiView.as_view(),name="update"),
     path('add_student/',StudentCreateApiView.as_view(),name="register_student"),
-    path('add_class/',ClassCreateApiView.as_view(),name="add_class")
+    path('add_class/',ClassCreateApiView.as_view(),name="add_class"),
+    path('attendence/',AttendanceCreateUpdateApiView.as_view(),name='attendence'),
+    path('attendence/<int:pk>',AttendanceCreateUpdateApiView.as_view(),name='update_attendence'),
+    path('subject',SubjectCreateApiView.as_view(),name="add_subject"),
+    path('assign_teacher',AssignTeacherApiView.as_view(),name="assing_teacher")
 ]

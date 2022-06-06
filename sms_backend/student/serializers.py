@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from student.models import user_model,classes_model,student_realtions
+from student.models import user_model,classes_model,student_realtions,attendence,subject,teacher_relations
 
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +26,19 @@ class StudentSerilizer(serializers.ModelSerializer):
         section = validated_data.get('section')
         student_relation = student_realtions.objects.create(student = student, parent = parent,classes = classes,section = section)
         return student_relation
+
+class AttendenceSerilizer(serializers.ModelSerializer):
+    class Meta :
+        model = attendence
+        fields = '__all__'
+
+    
+class SubjectSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = subject
+        fields = "__all__"
+
+class TeacherAssignSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=teacher_relations
+        fields= "__all__"
